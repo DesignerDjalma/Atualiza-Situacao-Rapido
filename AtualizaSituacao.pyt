@@ -155,6 +155,12 @@ class AtualizaSituacao(object):
         mxd = arcpy.mapping.MapDocument("Current")
         municipios = texto(parameters[0].valueAsText)
         lista = municipios.split(',')
+        true_list = []
+        for i in lista:
+            if i[0] == " ":
+                true_list.append(i[1:])
+            else:
+                true_list.append(i)
         messages.addMessage('municipios {}'.format(municipios))
         messages.addMessage('lista {}'.format(lista))
         self.func_atualiza_situacao(mxd, lista)
