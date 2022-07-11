@@ -166,3 +166,5 @@ class AtualizaSituacao(object):
         self.func_atualiza_situacao(mxd, lista)
 
         return
+
+# comentario inutil
