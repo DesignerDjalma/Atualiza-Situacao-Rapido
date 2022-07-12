@@ -162,8 +162,8 @@ class AtualizaSituacao(object):
             else:
                 true_list.append(i)
         messages.addMessage('municipios {}'.format(municipios))
-        messages.addMessage('lista {}'.format(lista))
-        self.func_atualiza_situacao(mxd, lista)
+        messages.addMessage('lista {}'.format(true_list))
+        self.func_atualiza_situacao(mxd, true_list)
 
         return
 
