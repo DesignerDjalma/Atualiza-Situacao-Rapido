@@ -1,7 +1,7 @@
 import arcpy
 
 import sys 
-reload(sys) # ignore
+# reload(sys) # ignore
 sys.setdefaultencoding("utf-8")
 
 
