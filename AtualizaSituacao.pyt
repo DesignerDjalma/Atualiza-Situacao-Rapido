@@ -152,19 +152,31 @@ class AtualizaSituacao(object):
     def execute(self, parameters, messages):
         """The source code of the tool."""
 
-        mxd = arcpy.mapping.MapDocument("Current")
-        municipios = texto(parameters[0].valueAsText)
-        lista = municipios.split(',')
-        true_list = []
-        for i in lista:
-            if i[0] == " ":
-                true_list.append(i[1:])
-            else:
-                true_list.append(i)
-        messages.addMessage('municipios {}'.format(municipios))
-        messages.addMessage('lista {}'.format(true_list))
+        mxd, true_list = atualizaMapaDeSitucao(parameters[0].valueAsText, messages)
         self.func_atualiza_situacao(mxd, true_list)
-
+        
         return
 
+
+
+def atualizaMapaDeSitucao(parametro, mensagem):
+    mxd = arcpy.mapping.MapDocument("Current")
+    municipios = texto(parametro)
+    lista = municipios.split(',')
+    true_list = []
+    for i in lista:
+        if i[0] == " ":
+            true_list.append(i[1:])
+        else:
+            true_list.append(i)
+    mensagem.addMessage('municipios {}'.format(municipios))
+    mensagem.addMessage('lista {}'.format(true_list))
+    return mxd, true_list
+
+
+
+
 # comentario inutil
+
+
+
