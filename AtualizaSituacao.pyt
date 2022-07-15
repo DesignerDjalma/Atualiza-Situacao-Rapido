@@ -21,6 +21,14 @@ class Toolbox(object):
         self.tools = [AtualizaSituacao]
 
 
+class Argumentos:
+    pString = {
+    "datatype":"GPString",
+    "parameterType":"Required",
+    "direction":"Input",
+    }
+
+
 class AtualizaSituacao(object):
     def func_atualiza_situacao(self, mxd, lista):
         """Atualiza o mapa de situacao de acordo com as 
@@ -115,46 +123,27 @@ class AtualizaSituacao(object):
         arcpy.RefreshActiveView()
     
     def __init__(self):
-        """Define the tool (tool name is the name of the class)."""
         self.label = texto("Atualizador de Mapa de Situação")
         self.description = texto("Essa feramenta faz a atualização do definitions querys muito rápido.")
         self.canRunInBackground = False
 
     def getParameterInfo(self):
-        """Define parameter definitions"""
-
-        ps = {
-            "datatype":"GPString",
-            "parameterType":"Required",
-            "direction":"Input",
-            }
-
-        municipio = arcpy.Parameter(displayName=texto('Município'),name='municipio',**ps)
-
+        municipio = arcpy.Parameter(displayName=texto('Município'),name='municipio',**Argumentos.pString)
         params = [municipio]
         return params
 
     def isLicensed(self):
-        """Set whether tool is licensed to execute."""
         return True
 
     def updateParameters(self, parameters):
-        """Modify the values and properties of parameters before internal
-        validation is performed.  This method is called whenever a parameter
-        has been changed."""
         return
 
     def updateMessages(self, parameters):
-        """Modify the messages created by internal validation for each tool
-        parameter.  This method is called after internal validation."""
         return
 
     def execute(self, parameters, messages):
-        """The source code of the tool."""
-
         mxd, true_list = atualizaMapaDeSitucao(parameters[0].valueAsText, messages)
         self.func_atualiza_situacao(mxd, true_list)
-        
         return
 
 
